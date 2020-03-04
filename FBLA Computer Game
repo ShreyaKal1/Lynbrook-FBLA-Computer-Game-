@@ -1,0 +1,410 @@
+import pygame 
+from pygame.locals import*
+import random
+from datetime import datetime
+import math, random, sys
+import time
+import numpy as np
+#from playsound import playsound
+#import simpleaudio as sa #pip install simpleaudio
+
+pygame.init()
+#dimensions of window
+window_width=1600
+window_height=840
+#for later
+animation_increment=10
+clock_tick_rate=20
+
+# Open a window
+size = (window_width, window_height)
+screen = pygame.display.set_mode(size)
+
+
+b2 = pygame.image.load("2block.png")
+b2 = pygame.transform.scale(b2, (400,300))
+b3 = pygame.image.load("3block.png")
+b3 = pygame.transform.scale(b3, (450,300))
+b4 = pygame.image.load("4block.png")
+b4 = pygame.transform.scale(b4, (400,300))
+
+
+# Set title to the window
+pygame.display.set_caption("Suits")
+
+clock = pygame.time.Clock()
+background_image = pygame.image.load("Suits.png").convert()
+background_image = pygame.transform.scale(background_image, (1550,800))
+
+# create a surface object, image is drawn on it. 
+image = pygame.image.load('angryboss1.png') 
+fireball = pygame.transform.scale(pygame.image.load('fireball.png'),(80,50))
+fx = 350 
+fy = 10
+
+
+back =  pygame.image.load('nightcity.png').convert()
+back = pygame.transform.scale(back,(1650,890))
+#infinite loop to show image
+playb = pygame.transform.scale(pygame.image.load('play button.png'),(275,125))
+playd = pygame.transform.scale(pygame.image.load('playdark.png'),(322,142))
+quitd= pygame.transform.scale(pygame.image.load('quitdark.png'),(303,154))
+quitb = pygame.transform.scale(pygame.image.load('Quit.png'),(300,150))
+
+
+
+button1 = pygame.transform.scale(pygame.image.load('futureb.png'),(400,200))
+button1b = pygame.transform.scale(pygame.image.load('futured.png'),(400,200))
+button2 = pygame.transform.scale(pygame.image.load('businessb.png'),(400,200))
+button2b = pygame.transform.scale(pygame.image.load('businessd.png'),(400,200))
+button3 = pygame.transform.scale(pygame.image.load('leaderb.png'),(400,200))
+button3b = pygame.transform.scale(pygame.image.load('leaderd.png'),(400,200))
+button4 = pygame.transform.scale(pygame.image.load('americab.png'),(400,200))
+button4b = pygame.transform.scale(pygame.image.load('americad.png'),(400,200))
+    
+lvlsback = pygame.transform.scale(pygame.image.load('lvls.png'),(1700,1000))
+chooseback = pygame.transform.scale(pygame.image.load('chooseback.png'),(1600,723))
+
+
+
+
+manb = pygame.transform.scale(pygame.image.load('manb.png'),(400,400))
+mand = pygame.transform.scale(pygame.image.load('mand.png'),(400,400))
+womanb = pygame.transform.scale(pygame.image.load('womanb.png'),(400,400))
+womand = pygame.transform.scale(pygame.image.load('womand.png'),(400,400))
+
+backb = pygame.transform.scale(pygame.image.load('backb.png'),(50,50))
+
+multsing = pygame.transform.scale(pygame.image.load('multsing.png'),(1600,723))
+sing = pygame.transform.scale(pygame.image.load('sing.png'),(400,400))
+singd = pygame.transform.scale(pygame.image.load('singb.png'),(400,400))
+multi = pygame.transform.scale(pygame.image.load('Multiplayer.png'),(400,400))
+multid = pygame.transform.scale(pygame.image.load('Multiplayer-2.png'),(400,400))
+
+secondplay = pygame.transform.scale(pygame.image.load('secondplay.png'),(1600,723))
+
+
+
+person1 = ''
+person2 = ''
+singleP = ''
+
+school1 = pygame.transform.scale(pygame.image.load('School1.png'),(1800,1300))
+school2 = pygame.transform.scale(pygame.image.load('school2.png'),(1600,723))
+school3 = pygame.transform.scale(pygame.image.load('school3.png'),(1600,723))
+
+city1 = pygame.transform.scale(pygame.image.load('city1.png'),(1800,1100))
+city2 = pygame.transform.scale(pygame.image.load('city2.png'),(1600,723))
+city3 = pygame.transform.scale(pygame.image.load('city3.png'),(1600,723))
+
+road1 = pygame.transform.scale(pygame.image.load('roads1.png'),(1800,1300))
+road2 = pygame.transform.scale(pygame.image.load('roads2.png'),(1600,723))
+road3 = pygame.transform.scale(pygame.image.load('roads3.png'),(1600,723))
+
+office1 = pygame.transform.scale(pygame.image.load('office1.png'),(1800,1300))
+office2 = pygame.transform.scale(pygame.image.load('office2.png'),(1600,723))
+office3 = pygame.transform.scale(pygame.image.load('office3.png'),(1600,723))
+
+def Game( lvl):
+    #x,y = pygame.mouse.get_pos()
+    if (lvl == 1):
+        a = school1
+        b = school2
+        c = school3 
+    elif (lvl == 2):
+        a = city1
+        b = city2
+        c = city3
+    elif (lvl == 3):
+        a = road1
+        b = road2
+        c = road3
+    elif (lvl ==4):
+        a = office1
+        b = office2
+        c = office3
+    if(lvl == 1):
+        screen.blit(a,(-35,-30))
+    elif(lvl == 2):
+        screen.blit(a, (-100,-250))
+    elif(lvl == 3):
+        screen.blit(a,(-100, -300))
+    elif(lvl == 3):
+        screen.blit(a, (-100,-300))
+    elif(lvl == 4):
+        screen.blit(a, (-100,-400))
+    
+   
+    pygame.display.flip()
+    pygame.time.delay(4)
+
+    clock.tick(clock_tick_rate)
+    #if(lvl == 1):
+        #return 'game1'
+    #elif(lvl == 2):
+        #return 'game2'
+   # elif(lvl == 3):
+        #return 'game3'
+    
+    #return 'game4'
+
+    
+    
+def Levels(event):
+    screen.blit(lvlsback,(-36,-25))
+    screen.blit(button1, (530, 50))
+    screen.blit(button2, (530, 200))
+    screen.blit(button3, (530, 350))
+    screen.blit(button4, (530, 500))
+    screen.blit(backb, (1300, 0))
+    
+    x,y = pygame.mouse.get_pos()
+    if event.type == pygame.MOUSEBUTTONDOWN:
+        if(x >= 1300 and x <= 1350 and y >=0 and y<=50):
+            return 'home'
+        elif(x >= 530 and x <= 870 and y>= 50 and y<= 140):
+            return 'game1'
+        elif(x >= 530 and x <= 870 and y>= 200 and y<= 290):
+            return 'game2'
+        elif(x >= 530 and x <= 870 and y>= 350 and y<= 440):
+            return 'game3'
+        elif(x >= 530 and x <= 870 and y>= 500 and y<= 590):
+            return 'game4'
+            
+    else:
+        if(x >= 530 and x <= 870 and y>= 50 and y<= 140):
+            screen.blit(button1b,((530,50)))
+        elif(x >= 530 and x <= 870 and y>= 200 and y<= 290):
+            screen.blit(button2b,((530,200)))
+        elif(x >= 530 and x <= 870 and y>= 350 and y<= 440):
+            screen.blit(button3b,((530,350)))
+        elif(x >= 530 and x <= 870 and y>= 500 and y<= 590):
+            screen.blit(button4b,((530,500)))
+    pygame.display.flip()
+    pygame.time.delay(2)
+
+    clock.tick(clock_tick_rate)
+    return 'levels'
+
+def HomePage(event):
+    
+    screen.blit(background_image, (0, 0))
+    screen.blit(playb, (585, 350))
+    screen.blit(quitb, (595, 450))
+
+    if event.type == pygame.MOUSEBUTTONDOWN:
+        x,y = pygame.mouse.get_pos()
+        if(x >= 595 and x <= 895 and y >= 450 and y<= 600):
+            return 'dead'
+        else:
+            if(x >= 585 and x <= 860 and y >= 350 and y<= 475):
+                return 'levels'
+    else:
+        x,y = pygame.mouse.get_pos()
+        if(x >= 585 and x <= 860 and y >= 350 and y<= 410):
+            screen.blit(playd, (583, 348))
+        elif(x >= 595 and x <= 865 and y >= 450 and y<= 500):
+            screen.blit(quitd, (593, 380))
+        else:
+            pygame.time.delay(10)
+            screen.blit(background_image, (0, 0))
+            screen.blit(playb, (585, 350))
+            screen.blit(quitb, (595, 450))
+    
+    pygame.display.flip()
+    pygame.time.delay(2)
+
+    clock.tick(clock_tick_rate)
+    return 'home'
+
+
+
+BLACK = (0, 0, 0, 255)
+WHITE = (255, 255, 255, 255)
+score = 0
+class platform:
+    def __init__(self, x, y, width):
+        self.x1 = x
+        self.y = y
+        self.x2 = x + width
+    def test(self, player):
+        if player.x < self.x1 or player.x > self.x2: return None
+        if player.y <= self.y and player.y + player.velocity >= self.y: return self
+        return None
+class platforms:
+    def __init__(self):
+        self.container = list([])
+    def add(self, p):
+        self.container.append(p)
+    def testCollision(self, player,lvl):
+        if not player.falling: return False
+        for p in self.container:
+            result = p.test(player)
+            if result:
+                player.currentPlatform = result
+                player.y = result.y
+                player.falling = False
+                a = random.randint(0,2)
+                if(a == 1 and player.y < 720-10):
+                    if(self.q() == True):
+                        score+=20
+                return True
+                score+=10
+                font = pygame.font.SysFont(None,55) # sets up font for score
+                p = font.render('Score: ' + str(score),True,(255,255,255))
+                screen.blit(p,[0,0])
+                pygame.display.flip() # updates display
+                pygame.display.update() # updates display
+        return False
+    def q(self):
+        k = pygame.key.get_pressed()
+        question1 = pygame.image.load('Q1.png').convert()
+        question1 = pygame.transform.scale(question1, (675, 450))
+        screen.blit(question1, (400,100))
+        a1 = pygame.image.load('A1.png')
+        a1 = pygame.transform.scale(a1, (400, 200))
+        screen.blit(a1, (400, 100))
+        b1 = pygame.image.load('A2.png')
+        b1 = pygame.transform.scale(b1, (400, 200))
+        screen.blit(b1,(400,200))
+        pygame.display.flip()
+        pygame.time.delay(1800)
+        k = pygame.key.get_pressed()
+        if(k[K_a]):
+            return True
+        return False
+    def draw(self):
+        global WHITE
+        display = pygame.display.get_surface()
+        for p in self.container:
+            pygame.draw.line(screen, WHITE, (p.x1, p.y), (p.x2, p.y), 10)
+    def do(self, player, lvl):
+        self.testCollision(player,lvl)
+        self.draw()
+class player:
+    def __init__(self, velocity, maxJumpRange):
+        self.velocity = velocity
+        self.maxJumpRange = maxJumpRange
+    def setLocation(self, x, y):
+        self.x = x 
+        self.y = y
+        self.xVelocity = 0
+        self.jumping = False
+        self.jumpCounter = 0
+        self.falling = True
+        self.currentPlatform = None
+    def keys(self):
+        k = pygame.key.get_pressed()
+        if k[K_LEFT]: self.xVelocity = -self.velocity 
+        elif k[K_RIGHT]: self.xVelocity = self.velocity
+        else: self.xVelocity = 0
+        if k[K_UP] and not self.jumping and not self.falling:
+            self.jumping = True
+            self.jumpCounter = 0
+    def move(self):
+        self.x += self.xVelocity
+        if self.currentPlatform:
+            if not self.currentPlatform.test(self):
+                self.falling = True
+                self.currentPlatform = None
+        if self.jumping:
+            self.y -= self.velocity
+            self.jumpCounter += 1
+            if self.jumpCounter == self.maxJumpRange:
+                self.jumping = False
+                self.falling = True
+        elif self.falling:# and not self.currentPlatform:
+                self.y += self.velocity
+    def draw(self):
+        display = pygame.display.get_surface()
+        m = pygame.transform.scale(pygame.image.load('angryboss1.png'),(30,55))
+        display.blit(m, ((int)(self.x), (int)(self.y - 50)))
+    def do(self):
+        self.keys()
+        self.move()
+        self.draw()
+
+PLAYER = player(10, 20)
+PLAYER.setLocation(100, window_height - 300)
+
+PLATFORMS = platforms()
+PLATFORMS.add(platform(0, window_height - 10, window_width ))
+
+PLATFORMS.add(platform(0, 720, 1920))
+
+for i in range(0, 20):
+    PLATFORMS.add(platform(random.randint(0, window_width - 50), random.randint(50, window_height - 60), 50))
+
+dead=False      
+n = 'home'
+
+def events():
+    for event in pygame.event.get():
+        if event.type == QUIT or (event.type == KEYDOWN and event.key == K_ESCAPE):
+            pygame.quit()
+            exit()
+
+def loop(lvl):
+    while True:
+        events()
+        PLATFORMS.do(PLAYER,lvl)
+        PLAYER.do()
+
+        pygame.display.update()
+        clock.tick(120)
+        if(lvl == 1):
+            Game(1)
+        elif(lvl == 2):
+            Game(2)
+        elif(lvl == 3):
+            Game(3)
+        elif(lvl == 4):
+            Game(4)
+        #screen.blit(back,(-100,-250)) 
+
+
+
+while(dead==False):
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                dead = True
+            elif event.type == KEYDOWN:
+                 if(event.key == K_ESCAPE):
+                    dead = True
+            elif n == 'dead':
+                dead = True
+            else:
+                if(n == 'home'):
+                    n = HomePage(event)
+                elif(n == "levels"):
+                    n = Levels(event)
+                #else:
+                    #dead = True
+                #else:
+                    #screen.blit(back,(-50,-50))
+                    #PLATFORMS.do(PLAYER)
+                    #PLAYER.do()
+                    
+                elif(n == 'game1'):
+                    loop(1)  
+                    dead = True
+                elif(n == 'game2'):
+                    loop(2)
+                    dead = True
+                elif(n == 'game3'):
+                    loop(3)
+                    dead = True
+                elif(n == 'game4'):
+                    loop(4)
+                    dead = True
+   
+        pygame.display.update()
+        pygame.time.delay(4)
+
+        #clock.tick(clock_tick_rate)   
+
+
+        
+        
+pygame.quit()
+exit()
